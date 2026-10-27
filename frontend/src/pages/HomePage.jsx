@@ -66,7 +66,7 @@ const HomePage = () => {
     const fetchFeatured = async () => {
       try {
         const { data } = await api.get(
-  "/recipes?page=1&limit=6"
+  "/api/recipes?page=1&limit=6"
 );
 
 setFeaturedRecipes(data.data || []);

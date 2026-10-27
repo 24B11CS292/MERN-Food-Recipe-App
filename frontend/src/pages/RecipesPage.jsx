@@ -65,8 +65,8 @@ const RecipesPage = () => {
           params.set("limit", 9);
 
           const { data } = await api.get(
-            `/recipes?${params.toString()}`
-          );
+  `/api/recipes?${params.toString()}`
+);
 
           setRecipes(data.data || []);
           setTotalRecipes(data.total || 0);
