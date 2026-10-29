@@ -20,11 +20,11 @@ const RecipeDetailPage = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const { data } = await api.get(`/recipes/${id}`);
+        const { data } = await api.get(`/api/recipes/${id}`);
         setRecipe(data.data);
 
         if (user) {
-          const profileRes = await api.get("/auth/me");
+          const profileRes = await api.get("/api/auth/me");
 
           const savedIds = profileRes.data.data.savedRecipes.map((r) =>
             typeof r === "object" ? r._id : r
@@ -51,7 +51,7 @@ const RecipeDetailPage = () => {
     }
 
     try {
-      const { data } = await api.post(`/recipes/${id}/save`);
+      const { data } = await api.post(`/api/recipes/${id}/save`);
 
       setSaved(data.saved);
       toast.success(data.message);
@@ -66,7 +66,7 @@ const RecipeDetailPage = () => {
     }
 
     try {
-      await api.delete(`/recipes/${id}`);
+      await api.delete(`/api/recipes/${id}`);
 
       toast.success("Recipe deleted");
       navigate("/recipes");
@@ -86,14 +86,14 @@ const RecipeDetailPage = () => {
     setSubmittingReview(true);
 
     try {
-      await api.post(`/recipes/${id}/reviews`, {
+      await api.post(`/api/recipes/${id}/reviews`, {
         rating: reviewRating,
         comment: reviewComment,
       });
 
       toast.success("Review submitted!");
 
-      const { data } = await api.get(`/recipes/${id}`);
+      const { data } = await api.get(`/api/recipes/${id}`);
       setRecipe(data.data);
 
       setReviewComment("");
