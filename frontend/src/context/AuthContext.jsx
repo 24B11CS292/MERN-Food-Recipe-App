@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   // Refresh current user from database
   const refreshUser = async () => {
     try {
-      const { data } = await api.get("/auth/me");
+      const { data } = await api.get("/api/auth/me");
 
       const updatedUser = data.data;
 
@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const { data } = await api.post(
-        "/auth/register",
+        "/api/auth/register",
         {
           name,
           email,
@@ -112,7 +112,7 @@ export const AuthProvider = ({ children }) => {
 
     try {
       const { data } = await api.post(
-        "/auth/login",
+        "/api/auth/login",
         {
           email,
           password,
