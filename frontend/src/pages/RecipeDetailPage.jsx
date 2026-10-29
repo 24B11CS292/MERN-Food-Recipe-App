@@ -43,22 +43,25 @@ const RecipeDetailPage = () => {
     fetchRecipe();
   }, [id, user, navigate]);
 
-  const handleSave = async () => {
-    if (!user) {
-      toast.error("Please login to save recipes");
-      navigate("/login");
-      return;
-    }
+ const handleSave = async () => {
+  if (!user) {
+    toast.error("Please login to save recipes");
+    navigate("/login");
+    return;
+  }
 
-    try {
-      const { data } = await api.post(`/api/recipes/${id}/save`);
+  try {
+    const { data } = await api.post(`/api/recipes/${id}/save`);
 
-      setSaved(data.saved);
-      toast.success(data.message);
-    } catch (error) {
-      toast.error("Failed to save recipe");
-    }
-  };
+    console.log("SAVE RESPONSE:", data);
+
+    setSaved(data.saved);
+    toast.success(data.message);
+  } catch (error) {
+    console.log("SAVE ERROR:", error.response?.data);
+    toast.error("Failed to save recipe");
+  }
+};
 
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this recipe?")) {

@@ -21,10 +21,10 @@ const ProfilePage = () => {
       setLoading(true);
 
       const recipesRes = await api.get(
-        `/recipes?author=${user._id}&limit=50`
+        `/api/recipes?author=${user._id}&limit=50`
       );
 
-      const profileRes = await api.get("/auth/me");
+      const profileRes = await api.get("/api/auth/me");
 
       setMyRecipes(recipesRes.data.data || []);
       setMyRecipeCount(recipesRes.data.total || 0);
